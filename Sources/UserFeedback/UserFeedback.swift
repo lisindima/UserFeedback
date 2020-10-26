@@ -11,16 +11,18 @@ import SwiftUI
 struct ContentView: View {
     @State private var typeFeedback: TypeFeedback = .bug
     @State private var typeReproduce: TypeReproduce = .yes_every_time
-    @State private var diagnosticsInclude: Bool = false
+    @State private var diagnosticsInclude: Bool = true
     @State private var name: String = "Дмитрий"
     @State private var email: String = "lisindima1996@gmail.com"
+    @State private var titleFeedback: String = ""
+    @State private var descriptionFeedback: String = ""
     
     var body: some View {
         Form {
-            Section(header: Text("Выберите подходящий вариант из списка").fontWeight(.bold)) {
+            Section(header: Text("Основное").fontWeight(.bold)) {
                 Picker(
                     selection: $typeFeedback,
-                    label: Text("")
+                    label: Text("Какой тип отзыва вы хотите отправить?")
                 ) {
                     Text("Ошибка в приложении")
                         .tag(TypeFeedback.bug)
@@ -29,12 +31,10 @@ struct ContentView: View {
                     Text("Другое")
                         .tag(TypeFeedback.other)
                 }
-            }
-            if typeFeedback == .bug {
-                Section(header: Text("Вы можете воспроизвести ошибку?").fontWeight(.bold)) {
+                if typeFeedback == .bug {
                     Picker(
                         selection: $typeReproduce,
-                        label: Text("")
+                        label: Text("Вы можете воспроизвести ошибку?")
                     ) {
                         Text("Да, каждый раз")
                             .tag(TypeReproduce.yes_every_time)
@@ -46,13 +46,24 @@ struct ContentView: View {
                             .tag(TypeReproduce.no)
                     }
                 }
-                Section(header: Text("Диагностика").fontWeight(.bold)) {
+            }
+            if typeFeedback == .bug {
+                Section(header: Text("Диагностика").fontWeight(.bold), footer: Text("Файлы диагностики могут включать такую ​​информацию, как модель вашего устройства, версия операционной системы.")) {
                     Toggle("Прикрепить файл диагностики", isOn: $diagnosticsInclude)
                 }
             }
-            Section(header: Text("Укажите вашу контактную информацию").fontWeight(.bold)) {
+            Section(header: Text("Контактная информация").fontWeight(.bold)) {
                 TextField("Имя", text: $name)
                 TextField("Почта", text: $email)
+            }
+            Section {
+                TextField("Краткое описание проблемы", text: $titleFeedback)
+                #if os(watchOS)
+                TextField("Полное описание проблемы", text: $descriptionFeedback)
+                #else
+                TextEditor(text: $descriptionFeedback)
+                    .frame(height: 300)
+                #endif
             }
         }
     }
