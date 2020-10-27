@@ -1,5 +1,5 @@
 //
-//  UserFeedback.swift
+//  ContentView.swift
 //  UserFeedback
 //
 //  Created by Дмитрий Лисин on 26.10.2020.
@@ -69,43 +69,8 @@ struct ContentView: View {
     }
 }
 
-enum TypeFeedback: String {
-    case bug = "Ошибка в приложении"
-    case feature_request = "Запрос функции"
-    case other = "Другое"
-}
-
-enum TypeReproduce: String {
-    case yes_every_time = "Да, каждый раз"
-    case yes_sometimes = "Да, иногда"
-    case yes_rarely = "Да, редко"
-    case no = "Нет"
-}
-
-struct UserFeedbackModifier: ViewModifier {
-    @Binding var isPresented: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .sheet(isPresented: $isPresented) {
-                NavigationView {
-                    ContentView()
-                        .ignoresSafeArea(edges: .bottom)
-                        .navigationTitle("Обратная связь")
-                        .toolbar {
-                            ToolbarItem(placement: .primaryAction) {
-                                Button(action: { isPresented = false }) {
-                                    Text("Закрыть")
-                                }
-                            }
-                        }
-                }
-            }
-    }
-}
-
-public extension View {
-    func userFeedback(isPresented: Binding<Bool>) -> some View {
-        modifier(UserFeedbackModifier(isPresented: isPresented))
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
