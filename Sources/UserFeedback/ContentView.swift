@@ -56,7 +56,7 @@ struct ContentView: View {
                 TextField("Имя", text: $name)
                 TextField("Почта", text: $email)
             }
-            Section {
+            Section(header: Text("Описание").fontWeight(.bold)) {
                 TextField("Краткое описание проблемы", text: $titleFeedback)
                 #if os(watchOS)
                 TextField("Полное описание проблемы", text: $descriptionFeedback)
