@@ -10,6 +10,10 @@ import SwiftUI
 struct UserFeedbackModifier: ViewModifier {
     @Binding var isPresented: Bool
     
+    private func close() {
+        isPresented = false
+    }
+    
     func body(content: Content) -> some View {
         content
             .sheet(isPresented: $isPresented) {
@@ -19,7 +23,7 @@ struct UserFeedbackModifier: ViewModifier {
                         .navigationTitle("Обратная связь")
                         .toolbar {
                             ToolbarItem(placement: .primaryAction) {
-                                Button(action: { isPresented = false }) {
+                                Button(action: close) {
                                     Text("Закрыть")
                                 }
                             }
