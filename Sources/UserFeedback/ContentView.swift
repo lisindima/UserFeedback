@@ -19,7 +19,7 @@ struct ContentView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Основное").fontWeight(.bold).padding(.horizontal)) {
+            Section(header: Text("Основное").fontWeight(.bold)) {
                 Picker(selection: $typeFeedback, label: Text("Какой тип отзыва вы хотите отправить?")) {
                     Text("Ошибка в приложении")
                         .tag(TypeFeedback.bug)
@@ -42,15 +42,15 @@ struct ContentView: View {
                 }
             }
             if typeFeedback == .bug {
-                Section(header: Text("Диагностика").fontWeight(.bold).padding(.horizontal), footer: Text("Файлы диагностики могут включать такую ​​информацию, как модель вашего устройства, версия операционной системы.").padding(.horizontal)) {
+                Section(header: Text("Диагностика").fontWeight(.bold), footer: Text("Файлы диагностики могут включать такую ​​информацию, как модель вашего устройства, версия операционной системы.")) {
                     Toggle("Прикрепить файл диагностики", isOn: $diagnosticsInclude)
                 }
             }
-            Section(header: Text("Контактная информация").fontWeight(.bold).padding(.horizontal)) {
+            Section(header: Text("Контактная информация").fontWeight(.bold)) {
                 TextField("Имя", text: $name)
                 TextField("Email", text: $email)
             }
-            Section(header: Text("Описание").fontWeight(.bold).padding(.horizontal)) {
+            Section(header: Text("Описание").fontWeight(.bold)) {
                 TextField("Краткое описание проблемы", text: $titleFeedback)
                 #if os(watchOS)
                 TextField("Полное описание проблемы", text: $descriptionFeedback)
