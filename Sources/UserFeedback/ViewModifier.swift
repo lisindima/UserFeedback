@@ -19,7 +19,6 @@ struct UserFeedbackModifier: ViewModifier {
             .sheet(isPresented: $isPresented) {
                 NavigationView {
                     ContentView()
-                        .ignoresSafeArea(edges: .bottom)
                         .navigationTitle("Обратная связь")
                         .toolbar {
                             ToolbarItem(placement: .primaryAction) {

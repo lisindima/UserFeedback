@@ -10,7 +10,7 @@ import SwiftUI
 struct SendButton: View {
     var title: String
     var loading: Bool = false
-    var colorButton: Color = .red
+    var colorButton: Color = .accentColor
     var colorText: Color = .white
     var action: () -> Void
     

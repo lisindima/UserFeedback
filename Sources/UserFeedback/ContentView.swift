@@ -45,6 +45,7 @@ struct ContentView: View {
                 if typeFeedback == .bug {
                     Section(header: Text("Диагностика").fontWeight(.bold), footer: Text("Файлы диагностики могут включать такую ​​информацию, как модель вашего устройства, версия операционной системы.")) {
                         Toggle("Прикрепить файл диагностики", isOn: $diagnosticsInclude)
+                            .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                     }
                 }
                 Section(header: Text("Контактная информация").fontWeight(.bold)) {
@@ -64,8 +65,6 @@ struct ContentView: View {
             SendButton(
                 title: "Отправить",
                 loading: false,
-                colorButton: .red,
-                colorText: .white,
                 action: {}
             )
             .padding(.horizontal)
